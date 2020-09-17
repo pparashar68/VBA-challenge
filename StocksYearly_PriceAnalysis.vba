@@ -5,6 +5,7 @@ For Each ws In Worksheets
         ws.Activate
         Call SetTitle
        Call CalculateSummary
+       Call GreatestChange
     Next ws
 
 
@@ -83,7 +84,7 @@ Dim cnt As Double
                 ElseIf year_close_price = 0 And year_open_price = 0 Then
                     percentage_change = 0
                 Else
-                    percentage_change = (yearly_price_change * 100) / year_close_price
+                    percentage_change = (yearly_price_change * 100) / year_open_price
                 End If
                 
                 
@@ -128,11 +129,35 @@ Dim cnt As Double
             End If
     
     
+    
     Next counter
 
-   
 
-'Next wks
+
+
+End Sub
+
+Sub GreatestChange()
+
+Dim greatest_percentage_increased  As Double
+Dim greatest_percentage_decreased   As Double
+Dim greatest_total_volume   As Double
+Dim total_rows  As Double
+Dim maxValue As Double
+Dim rng As Range
+Dim rng_volume  As Range
+
+
+total_rows = Cells(Rows.Count, "A").End(xlUp).Row
+greatest_percentage_increased = Application.WorksheetFunction.Max(Columns("K"))
+'MsgBox (greatest_percentage_increased)
+greatest_percentage_decreased = Application.WorksheetFunction.Min(Columns("K"))
+'MsgBox (greatest_percentage_decreased)
+greatest_total_volume = Application.WorksheetFunction.Max(Columns("L"))
+'MsgBox (greatest_total_volume)
+Range("Q2").Value = greatest_percentage_increased
+Range("Q3").Value = greatest_percentage_decreased
+Range("Q4").Value = greatest_total_volume
 
 
 End Sub
