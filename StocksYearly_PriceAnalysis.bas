@@ -33,10 +33,10 @@ Dim ticker As String
 Dim totalvolume              As Double
 Dim startcounter         As Double
 Dim endcounter           As Double
-Dim year_open_price     As Integer
-Dim year_close_price    As Integer
-Dim percentage_change   As Integer
-Dim yearly_price_change As Integer
+Dim year_open_price     As Double
+Dim year_close_price    As Double
+Dim percentage_change   As Double
+Dim yearly_price_change As Double
 Dim counter As Double
 
 
@@ -78,11 +78,20 @@ Dim cnt As Double
                 year_close_price = Cells(counter, 6).Value
                 
                 yearly_price_change = year_close_price - year_open_price
-                percentage_change = (yearly_price_change * 100) / year_close_price
+                Cells(cnt, "N").Value = year_close_price
+                If year_close_price = 0 And year_open_price <> 0 Then
+                    Cells(cnt, "N").Value = 0
+                    percentage_change = -100
+                ElseIf year_close_price = 0 And year_open_price = 0 Then
+                    percentage_change = 0
+                Else
+                    percentage_change = (yearly_price_change * 100) / year_close_price
+                End If
+                
+                'percentage_change = (yearly_price_change * 100) / year_close_price
                 
                 
                 Cells(cnt, "K").Value = Cells(counter, 6).Value
-                ticker_YearFirst_day_closePrice = 0
                 Cells(cnt, "I").Value = ticker
                 Cells(cnt, "J").Value = yearly_price_change
                 Cells(cnt, "K").Value = percentage_change
@@ -90,6 +99,10 @@ Dim cnt As Double
                       
                 cnt = cnt + 1
                 totalvolume = 0
+                year_close_price = 0
+                yearly_price_change = 0
+                percentage_change = 0
+                year_open_price = 0
             
             
             End If
