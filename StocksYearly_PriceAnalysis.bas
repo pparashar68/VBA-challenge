@@ -84,7 +84,7 @@ Dim cnt As Double
                 ElseIf year_close_price = 0 And year_open_price = 0 Then
                     percentage_change = 0
                 Else
-                    percentage_change = (yearly_price_change * 100) / year_open_price
+                    percentage_change = (yearly_price_change) / year_open_price
                 End If
                 
                 
@@ -105,6 +105,8 @@ Dim cnt As Double
                                 End If
                          
                          Cells(cnt, "K").Value = percentage_change
+                         
+                         Cells(cnt, "K").NumberFormat = "00.0%"
                         
                         ' format cells positive as green and negative change as red base on cell value
                                  If Cells(cnt, "K").Value > 0 Then
@@ -157,8 +159,14 @@ greatest_total_volume = Application.WorksheetFunction.Max(Columns("L"))
 'MsgBox (greatest_total_volume)
 Range("Q2").Value = greatest_percentage_increased
 Range("Q3").Value = greatest_percentage_decreased
+Cells(2, "Q").NumberFormat = "00.0%"
+Cells(3, "Q").NumberFormat = "00.0%"
 Range("Q4").Value = greatest_total_volume
 
+Range("P2").Value = "=INDEX(I2:I290,MATCH(Q2,K2:K290,0))"
+Range("P3").Value = "=INDEX(I2:I290,MATCH(Q3,K2:K290,0))"
+Range("P4").Value = "=INDEX(I2:I290,MATCH(Q4,L2:L290,0))"
+Cells(4, "Q").NumberFormat = "0,000"
 
 End Sub
 
