@@ -3,9 +3,9 @@ Sub VbaChallenge()
 
 For Each ws In Worksheets
         ws.Activate
-        Call SetTitle
-       Call CalculateSummary
-       Call GreatestChange
+        Call SetTitle                               'This subroutine initialize the cells and add Title heading to workshees or workbook
+        Call CalculateSummary              ' This subroutine go through each rows stocks values and calculate the summary of stock tickers
+        Call GreatestChange                  ' This subroutine calculate the summary values of stocks for each year
     Next ws
 
 
@@ -100,7 +100,7 @@ Dim cnt As Double
                                 ElseIf Cells(cnt, "J").Value < 0 Then
                                            Cells(cnt, "J").Interior.Color = vbRed
                                 Else
-                                           Cells(cnt, "J").Interior.Color = vbBlack
+                                           Cells(cnt, "J").Interior.Color = vbBlue
                                 
                                 End If
                          
@@ -114,7 +114,7 @@ Dim cnt As Double
                                 ElseIf Cells(cnt, "K").Value < 0 Then
                                            Cells(cnt, "K").Interior.Color = vbRed
                                 Else
-                                           Cells(cnt, "K").Interior.Color = vbBlack
+                                           Cells(cnt, "K").Interior.Color = vbBlue
                                 
                                 End If
                          Cells(cnt, "L").Value = totalvolume
@@ -156,7 +156,18 @@ greatest_percentage_increased = Application.WorksheetFunction.Max(Columns("K"))
 greatest_percentage_decreased = Application.WorksheetFunction.Min(Columns("K"))
 greatest_total_volume = Application.WorksheetFunction.Max(Columns("L"))
 Range("Q2").Value = greatest_percentage_increased
+If Range("Q2").Value > 0 Then
+        Range("Q2").Interior.Color = vbGreen
+        Else
+        Range("Q2").Interior.Color = vbRed
+End If
 Range("Q3").Value = greatest_percentage_decreased
+If Range("Q3").Value > 0 Then
+Range("Q3").Interior.Color = vbGreen
+Else
+Range("Q3").Interior.Color = vbRed
+End If
+
 Cells(2, "Q").NumberFormat = "00.0%"
 Cells(3, "Q").NumberFormat = "00.0%"
 Range("Q4").Value = greatest_total_volume
@@ -166,6 +177,11 @@ Range("P3").Value = "=INDEX(I2" & ":I" & total_rows & ",MATCH(Q" & 3 & ",K" & 2 
 Range("P4").Value = "=INDEX(I2" & ":I" & total_rows & ",MATCH(Q" & 4 & ",L" & 2 & ":L" & total_rows & ",0))"
 Cells(4, "Q").NumberFormat = "0,000"
 
+    
+
+    
+
+                                
 
 
 End Sub
