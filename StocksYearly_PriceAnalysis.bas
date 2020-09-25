@@ -106,7 +106,7 @@ Dim cnt As Double
                          
                          Cells(cnt, "K").Value = percentage_change
                          
-                         Cells(cnt, "K").NumberFormat = "00.0%"
+                         Cells(cnt, "K").NumberFormat = "00.00%"
                         
                         ' format cells positive as green and negative change as red base on cell value
                                  If Cells(cnt, "K").Value > 0 Then
@@ -168,8 +168,8 @@ Else
 Range("Q3").Interior.Color = vbRed
 End If
 
-Cells(2, "Q").NumberFormat = "00.0%"
-Cells(3, "Q").NumberFormat = "00.0%"
+Cells(2, "Q").NumberFormat = "00.00%"
+Cells(3, "Q").NumberFormat = "00.00%"
 Range("Q4").Value = greatest_total_volume
 
 Range("P2").Value = "=INDEX(I2" & ":I" & total_rows & ",MATCH(Q" & 2 & ",K" & 2 & ":K" & total_rows & ",0))"
